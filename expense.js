@@ -1,74 +1,72 @@
-let expense_per_category=[0,0,0,0,0];
-var count =4;
+let expense_per_category = [0, 0, 0, 0, 0];
+let count = 4;
+
 update_sum();
 
-function update_sum(){
-    var sum=document.querySelectorAll(".sum");
-    for(var i=0;i<sum.length;i++){
-        sum[i].innerHTML="-"+expense_expense_category[i]+"Rs.spent";
+function update_sum() {
+    const sums = document.querySelectorAll(".sum");
+    for (let i = 0; i < sums.length; i++) {
+        sums[i].innerHTML = `- ${expense_per_category[i]} Rs spent`;
     }
 }
-function add_expense(){
-    var amount=document.getElementsByClassName("form-input")[0].value;
-    var date=document.getElementsByClassName("form-input")[2].value;
-    var note=document.getElementsByClassName("form-input")[3].value;
-    var category=document.getElementsByClassName("form-input")[1].selectedIndex;
-    var selected=document.getElementsByTagName("option")[category].value;
 
-    if(amount && date && note && selected){
+function add_expense() {
+    const amount = document.querySelector('input[name="amount"]').value;
+    const date = document.querySelector('input[name="date"]').value;
+    const note = document.querySelector('input[name="note"]').value;
+    const categoryIndex = document.querySelector('select[name="category"]').selectedIndex;
+    const selected = document.querySelector('select[name="category"]').options[categoryIndex].value;
+
+    if (amount && date && note && selected) {
         alert("Successfully added expense!");
-        var table =document.getElementsByTagName("table")[0];
-        var new_row=document.createElement("tr");
-        new_row.innerHTML=`<tr style=border-bottom:1px solid white;>
+
+        const table = document.querySelector(".expense-table tbody");
+        const newRow = document.createElement("tr");
+        newRow.style.borderBottom = "1px solid white";
+        newRow.innerHTML = `
             <td>${amount}</td>
             <td>${selected}</td>
             <td>${date}</td>
             <td>${note}</td>
-            </tr>
         `;
-        table.appendChild(new_row);
+        table.appendChild(newRow);
 
-        expense_per_category[category]=parseInt(expense_per_category[category])+parseInt(amount);
+        expense_per_category[categoryIndex] += parseInt(amount);
         update_sum();
-        console.log(count);
-        document.getElementsByClassName("add-new-expense")[0].getElementsByClassName.display="none";
-    }
-    else{
+
+        document.querySelector('.add-new-expense').style.display = "none";
+    } else {
         alert("Please enter all details!");
     }
 }
-function add_category(){
-    var new_category_value=document.getElementsByName("new-category")[0].value;
-    if(new_category_value){
-        var dropdown=document.getElementsByName("category")[0];
-        var available_categories =document.getElementsByClassName("available-category")[0];
-        var new_category_option=document.createElement("option");
-        new_category_option.innerHTML=`<option>${new_category_value}</option>`;
+
+function add_category() {
+    const newCategoryValue = document.querySelector('input[name="new-category"]').value;
+    if (newCategoryValue) {
+        const dropdown = document.querySelector('select[name="category"]');
+        const availableCategories = document.querySelector(".available-categories");
+
+        const newCategoryOption = document.createElement("option");
+        newCategoryOption.textContent = newCategoryValue;
+        dropdown.appendChild(newCategoryOption);
+
         count++;
-        expense_per_category[count]=0;
-        var new_category_span=document.createElement("span");
-        new_category_span.innerHTML=`<span>${new_category_value}<span class="sum"> -${expense_per_category[count]}Rs spent</span></span>`;
-        dropdown.appendChild(new_category_option);
-        available_categories.appendChild(new_category_span);
-        document.getElementsByClassName("add-category")[0].getElementsByClassName.style.display="none";
+        expense_per_category[count] = 0;
 
+        const newCategorySpan = document.createElement("span");
+        newCategorySpan.innerHTML = `${newCategoryValue} <span class="sum"> -${expense_per_category[count]} Rs spent</span>`;
+        availableCategories.appendChild(newCategorySpan);
+
+        document.querySelector('.add-category').style.display = "none";
     }
 }
-function add_category_page(){
-    if(document.getElementsByClassName("add-category")[0].style.display=="block"){
-        document.getElementsByClassName("add-category")[0].style.display="none";
 
-    }
-    else {
-        document.getElementsByClassName("add-category")[0].style.display="block" ;
+function add_category_page() {
+    const addCategoryForm = document.querySelector('.add-category');
+    addCategoryForm.style.display = (addCategoryForm.style.display === "block") ? "none" : "block";
 }
-}
-function add_expense_page(){
-    if(document.getElementsByClassName("add-new-expense")[0].style.display=="block"){
-        document.getElementsByClassName("add-new-expense")[0].style.display="none";
 
-    }
-    else {
-        document.getElementsByClassName("add-new-expense")[0].style.display="block" ;
-}
+function add_expense_page() {
+    const addExpenseForm = document.querySelector('.add-new-expense');
+    addExpenseForm.style.display = (addExpenseForm.style.display === "block") ? "none" : "block";
 }
