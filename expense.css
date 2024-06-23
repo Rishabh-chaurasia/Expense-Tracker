@@ -7,7 +7,7 @@ body{
 .full_body{
     font-size: 18px;
     /* background-image: linear-gradient(to right top,#1b92ac,#00aeb2,#00c7a3,#6fdd83,#c1ec5f); */
-    background-image: url(photo.jpg);
+   background-image: url(https://images.unsplash.com/photo-1647366217949-80ecde2dd3e7?q=80&w=2036&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
     /* height: 800px; */
     /* max-width: 100%; */
     /* display: block; */
